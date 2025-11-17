@@ -1,0 +1,58 @@
+#include<stdio.h>
+#define n 3
+int queue[n];
+int front = -1 , rear = -1;
+
+void enqueue(int x){
+    if((rear+1)%n == front){
+        printf("queue full");
+    }
+    else if(front == -1 && rear == -1){
+        front = rear = 0;
+        queue[rear] = x;
+    }
+    else{
+        rear = (rear+1)%n;
+        queue[rear] = x;
+    }
+}
+
+void dequeue(){
+    if(front == rear){
+        printf("dequeue element is : %d\n",queue[front]);
+        front = rear = -1;
+    }
+    else if(front == -1 && rear == -1){
+        printf("queue empty");
+    }
+    else{
+        printf("dequeue element is : %d\n",queue[front]);
+        front = (front+1)%n;
+    }
+}
+void display(){
+    int i = front;
+  if(front == -1 && rear == -1 ){
+    printf("queue empty");
+  }
+  else{
+     while(i!=rear){
+         printf("%d\n",queue[i]);
+         i = (i+1)%n;
+     }
+     printf("%d",queue[i]);
+  }
+}
+int main(){
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    dequeue();
+    dequeue();
+    dequeue();
+    enqueue(4);
+    dequeue();
+    enqueue(6);
+    enqueue(7);
+    display();
+}
